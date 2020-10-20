@@ -111,12 +111,12 @@ If you have just installed Helm 3, you will have no configured repositories, plu
 But you may have had some of those things configured in your Helm 2 instance.
 
 For example, earlier we configured Helm 2 to use the Bitnami charts repository.
-We can use the `helm 2to3 move` command to migrate our configuration.
+We can use the `helm3 2to3 move` command to migrate our configuration.
 
 First, we'll do it in `--dry-run` mode:
 
 ```console
-$ helm 2to3 move config --dry-run
+$ helm3 2to3 move config --dry-run
 2020/10/20 14:25:52 NOTE: This is in dry-run mode, the following actions will not be executed.
 2020/10/20 14:25:52 Run without --dry-run to take the actions described below:
 2020/10/20 14:25:52 
@@ -194,7 +194,7 @@ As a last step, you can delete old Helm releases and even tiller itself.
 To delete old releases, use the `2to3` plugin's `cleanup` command.
 
 ```console
-$ helm 2to3 cleanup --dry-run
+$ helm3 2to3 cleanup --dry-run
 2020/10/20 15:41:36 NOTE: This is in dry-run mode, the following actions will not be executed.
 2020/10/20 15:41:36 Run without --dry-run to take the actions described below:
 2020/10/20 15:41:36 
