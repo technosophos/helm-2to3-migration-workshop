@@ -21,6 +21,18 @@ $ kubectl apply -f ./tiller-rbac.yaml
 $ helm2 init --service-account tiller
 ```
 
+## Where to Find Documentation
+
+In the course of doing the workshop below, you may find you need some additional references or documentation.
+Here are some good sources:
+
+- [Official blog post on migrating](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/#helm)
+- [Helm 3 documentation](https://helm.sh/docs/)
+- [Helm 2 documentation](https://v2.helm.sh/docs/)
+- [ArtifactHub package search](https://artifacthub.io/)
+- [Official deprecation timeline](https://helm.sh/blog/helm-v2-deprecation-timeline/)
+- [The Helm 2to3 Plugin](https://github.com/helm/helm-2to3)
+
 ## The Workshop
 
 ### Install Some Helm 2 Things
