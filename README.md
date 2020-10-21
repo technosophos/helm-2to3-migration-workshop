@@ -110,6 +110,20 @@ Now we're ready to do the actual migration.
 If you have just installed Helm 3, you will have no configured repositories, plugins, or starters.
 But you may have had some of those things configured in your Helm 2 instance.
 
+Check what's in your Helm 2 instance:
+
+```console
+$ helm2 repo list
+$ helm2 plugin list
+```
+
+And check what's in your Helm 3 instance:
+
+```console
+$ helm3 repo list
+$ helm3 plugin list
+```
+
 For example, earlier we configured Helm 2 to use the Bitnami charts repository.
 We can use the `helm3 2to3 move` command to migrate our configuration.
 
@@ -138,7 +152,7 @@ Helm v2 configuration will be moved to Helm v3 configuration.
 2020/10/20 14:25:57 [Helm 2] starters "/Users/technosophos/.helm/starters" will copy to [Helm 3] data folder "/Users/technosophos/Library/helm/starters" .
 ```
 
-If you are satisfied with what you see being moved, remove the `--dry-run` flag and try again.
+If you are satisfied with what you see being moved, remove the `--dry-run` flag and run the move.
 
 ### Migration Step 2: Moving Releases
 
@@ -146,7 +160,17 @@ In Matt Butcher's talk, he shared how releases used to be stored in `kube-system
 and are now stored in other namespaces using a different format.
 In this step, we will run the converter to migrate those releases.
 
-You can start by looking at the releases `helm3` currently knows about:
+We know we have some releases in Helm 2:
+
+```console
+$ helm2 list
+NAME     	REVISION	UPDATED                 	STATUS  	CHART          	APP VERSION	NAMESPACE
+drupal   	1       	Tue Oct 20 20:39:09 2020	DEPLOYED	drupal-9.1.0   	9.0.7  		default
+wordpress	1       	Tue Oct 20 20:39:48 2020	DEPLOYED	wordpress-9.8.0	5.5.1      	default
+$ 
+```
+
+Let's look at the releases `helm3` currently knows about:
 
 ```console
 $ helm3 ls
@@ -214,4 +238,3 @@ Helm v2 data will be cleaned up.
 The output above indicates what will be deleted.
 
 **If you JUST want to uninstall Tiller** and leave the releases alone, you can run `helm3 2to3 cleanup --tiller-cleanup`.
-
