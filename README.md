@@ -32,6 +32,7 @@ Here are some good sources:
 - [ArtifactHub package search](https://artifacthub.io/)
 - [Official deprecation timeline](https://helm.sh/blog/helm-v2-deprecation-timeline/)
 - [The Helm 2to3 Plugin](https://github.com/helm/helm-2to3)
+- [Configuring Helm to use the NEW charts repository](https://helm.sh/docs/faq/#troubleshooting)
 
 ## The Workshop
 
