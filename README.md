@@ -17,7 +17,7 @@ demos, I have `helm2` aliased to Helm 2, and `helm3` aliased to Helm 3.
 If you are just getting Helm 2 setup, you may need to do something like this:
 
 ```
-$ kubectl apply -f ./tiller-rbac.yaml 
+$ kubectl apply -f https://raw.githubusercontent.com/technosophos/helm-2to3-migration-workshop/master/tiller-rbac.yaml
 $ helm2 init --service-account tiller
 ```
 
