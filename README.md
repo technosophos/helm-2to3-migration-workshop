@@ -46,8 +46,8 @@ You can verify that these are installed:
 ```console
 $ helm2 ls
 NAME            REVISION        UPDATED                         STATUS          CHART           APP VERSION     NAMESPACE
-drupal          1               Tue Oct 20 14:08:21 2020        DEPLOYED        drupal-9.1.0    9.0.7           default  
-wordpress       1               Tue Oct 20 14:09:50 2020        DEPLOYED        wordpress-9.8.0 5.5.1           default  
+drupal          1               Tue Oct 20 14:08:21 2020        DEPLOYED        drupal-9.1.0    9.0.7           drupal  
+wordpress       1               Tue Oct 20 14:09:50 2020        DEPLOYED        wordpress-9.8.0 5.5.1           wordpress  
 ```
 
 At this point, we have a few things to migrate.
@@ -57,7 +57,7 @@ At this point, we have a few things to migrate.
 You will need Helm 3 to continue this workshop.
 Check out the [installation guide](https://helm.sh/docs/intro/install/) for instructions on how to get it.
 I have installed mine manually, and aliased the `helm3` command to it (`alias helm3=/Users/technosophos/Code/Go/src/helm.sh/helm/bin/helm`).
-You don't have to do this.
+You don't have to do this but you need to distinguish between Helm 2 and 3 as binaries are both named `helm`.
 You can double-check that your `helm` version is 3 using the `helm version` command:
 
 ```console
@@ -179,7 +179,7 @@ Now running `helm3 ls` should show the Wordpress release:
 ```console
 $ helm3 list
 NAME            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
-wordpress       default         1               2020-10-20 20:09:50.7562551 +0000 UTC   deployed        wordpress-9.8.0 5.5.1 
+wordpress       wordpress       1               2020-10-20 20:09:50.7562551 +0000 UTC   deployed        wordpress-9.8.0 5.5.1 
 ```
 
 Repeat the process for the `drupal` release.
@@ -189,16 +189,17 @@ Repeat the process for the `drupal` release.
 **WARNING:** This will delete both local and remote data. You may want to skip this step
 or just do the `--dry-run` to see how it would work.
 
-As a last step, you can delete old Helm releases and even tiller itself.
+As a last step, you can delete Helm v2 configuration, Helm v2 releases and even tiller itself.
+To cleanup Helm v2 completely, run `helm3 2to3 cleanup`.
 
-To delete old releases, use the `2to3` plugin's `cleanup` command.
+To delete Helm v2 releases only, use the `2to3` plugin's `cleanup` command.
 
 ```console
-$ helm3 2to3 cleanup --dry-run
+$ helm3 2to3 cleanup --release-cleanup --dry-run
 2020/10/20 15:41:36 NOTE: This is in dry-run mode, the following actions will not be executed.
 2020/10/20 15:41:36 Run without --dry-run to take the actions described below:
 2020/10/20 15:41:36 
-WARNING: "Helm v2 Configuration" "Release Data" "Tiller" will be removed. 
+WARNING: "Release Data" will be removed. 
 This will clean up all releases managed by Helm v2. It will not be possible to restore them if you haven't made a backup of the releases.
 Helm v2 may not be usable afterwards.
 
@@ -208,10 +209,9 @@ Helm v2 data will be cleaned up.
 2020/10/20 15:41:39 [Helm 2] Releases will be deleted.
 2020/10/20 15:41:39 [Helm 2] ReleaseVersion "drupal.v1" will be deleted.
 2020/10/20 15:41:39 [Helm 2] ReleaseVersion "wordpress.v1" will be deleted.
-2020/10/20 15:41:39 [Helm 2] Tiller in "kube-system" namespace will be removed.
-2020/10/20 15:41:39 [Helm 2] Home folder "/Users/technosophos/.helm" will be deleted.
 ```
 
 The output above indicates what will be deleted.
 
-**If you JUST want to uninstall Tiller** and leave the releases alone, you can run `helm2 reset`
+**If you JUST want to uninstall Tiller** and leave the releases alone, you can run `helm3 2to3 cleanup --tiller-cleanup`.
+
