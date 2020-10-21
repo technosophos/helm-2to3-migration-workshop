@@ -38,7 +38,7 @@ reasonably complex. We'll also set a few values just to verify that the migratio
 
 ```console
 $ helm2 install bitnami/drupal --set drupalEmail=me@example.com -n drupal 
-$ helm2 install bitnami/wordpress --set wordpressEmail me@example.com -n wordpress
+$ helm2 install bitnami/wordpress --set wordpressEmail=me@example.com -n wordpress
 ```
 
 You can verify that these are installed:
@@ -214,3 +214,4 @@ Helm v2 data will be cleaned up.
 The output above indicates what will be deleted.
 
 **If you JUST want to uninstall Tiller** and leave the releases alone, you can run `helm3 2to3 cleanup --tiller-cleanup`.
+
